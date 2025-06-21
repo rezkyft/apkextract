@@ -4,15 +4,27 @@ import os
 import time
 import re
 import zipfile
-from PyQt6.QtWidgets import (
-    QApplication, QWidget, QVBoxLayout, QHBoxLayout,
-    QPushButton, QLineEdit, QLabel, QTextEdit,
-    QFileDialog, QMessageBox, QGridLayout, QComboBox,
-    QSpacerItem, QSizePolicy, QProgressBar, QCheckBox,
-    QDialog # Added QDialog
-)
-from PyQt6.QtGui import QFont, QColor, QTextCharFormat, QTextCursor, QPainter, QBrush, QPen, QGuiApplication # Import QGuiApplication
-from PyQt6.QtCore import Qt, QThread, pyqtSignal, QTimer, QSize
+
+# --- START PyQt6 Dependency Check ---
+try:
+    from PyQt6.QtWidgets import (
+        QApplication, QWidget, QVBoxLayout, QHBoxLayout,
+        QPushButton, QLineEdit, QLabel, QTextEdit,
+        QFileDialog, QMessageBox, QGridLayout, QComboBox,
+        QSpacerItem, QSizePolicy, QProgressBar, QCheckBox,
+        QDialog
+    )
+    from PyQt6.QtGui import QFont, QColor, QTextCharFormat, QTextCursor, QPainter, QBrush, QPen, QGuiApplication
+    from PyQt6.QtCore import Qt, QThread, pyqtSignal, QTimer, QSize
+except ImportError:
+    # If PyQt6 is not found, try to display a basic message and exit
+    # This part needs to be very basic as PyQt6 itself might not be available
+    print("Error: PyQt6 is not installed.")
+    print("Please install PyQt6 using: pip install PyQt6")
+    print("Exiting application.")
+    sys.exit(1)
+# --- END PyQt6 Dependency Check ---
+
 
 # QThread class to run ADB commands in the background
 class WorkerThread(QThread):
